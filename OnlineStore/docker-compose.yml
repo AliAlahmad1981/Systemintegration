@@ -34,27 +34,27 @@ services:
     volumes: 
       - ./volumes/OrderDB:/var/opt/mssql/data
 
-  #accountservice:
-  #  image: accountservice
-  #  restart: always
-  #  ports:
-  #    - 5000:80
-  #  depends_on:
-  #    - accountdb
+  accountservice:
+    image: accountservice
+    restart: always
+    ports:
+      - 5000:80
+    depends_on:
+      - accountdb
 
-  #productservice:
-  #  image: productservice
-  #  restart: always
-  #  ports:
-  #    - 5001:80
-  #  depends_on:
-  #    - productdb
+  productservice:
+    image: productservice
+    restart: always
+    ports:
+      - 5001:80
+    depends_on:
+      - productdb
 
-  #orderservice:
-  #  image: orderservice
-  #  restart: always
-  #  ports:
-  #    - 5002:80
+  orderservice:
+    image: orderservice
+    restart: always
+    ports:
+      - 5002:80
 
-  #  depends_on:
-  #    - orderdb
+    depends_on:
+      - orderdb
