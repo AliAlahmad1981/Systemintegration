@@ -1,22 +1,60 @@
-version: '3.4'
+version: "3.4"
 
 services:
-  orderservice:
-    image: ${DOCKER_REGISTRY-}orderservice
-    build:
-      context: .
-      dockerfile: OrderService/Dockerfile
+  accountdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Str0ngPass!
+    volumes:
+      - ./volumes/AccountDB:/var/opt/mssql/data
 
-  productservice:
-    image: ${DOCKER_REGISTRY-}productservice
-    build:
-      context: .
-      dockerfile: ProductService/Dockerfile
+  productdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    ports:
+      - 1434:1433
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Str0ngPass!
+    volumes:
+      - ./volumes/ProductDB:/var/opt/mssql/data
 
+  orderdb:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: always
+    ports:
+      - 1435:1433
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Str0ngPass!
+    volumes: 
+      - ./volumes/OrderDB:/var/opt/mssql/data
 
-  accountservice:
-    image: ${DOCKER_REGISTRY-}accountservice
-    build:
-      context: .
-      dockerfile: AccountService/Dockerfile
+  #accountservice:
+  #  image: accountservice
+  #  restart: always
+  #  ports:
+  #    - 5000:80
+  #  depends_on:
+  #    - accountdb
 
+  #productservice:
+  #  image: productservice
+  #  restart: always
+  #  ports:
+  #    - 5001:80
+  #  depends_on:
+  #    - productdb
+
+  #orderservice:
+  #  image: orderservice
+  #  restart: always
+  #  ports:
+  #    - 5002:80
+
+  #  depends_on:
+  #    - orderdb

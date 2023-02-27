@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OrderService.Models;
 using System.Collections.Generic;
 
 namespace OrderService.Data
@@ -9,6 +10,6 @@ namespace OrderService.Data
             : base(options)
         {
         }
-        public DbSet<User> Users => Set<User>();
+        public DbSet<Order> Users => Set<Order>();
     }
 }
